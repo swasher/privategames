@@ -17,6 +17,10 @@ env.project_path = '/home/swasher/privategames'
 # def development():
 #     env.hosts = ['development']
 
+
+def github():
+    local('ssh-add ~/.ssh/github')
+
 def provision():
     """
     Setup all on provision/staging/deployment via Ansible. Development must run inside Vagrant box.
