@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<script>
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    })
+</script>
+
+{% comment %}<form action="/search/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit" />
+</form>{% endcomment %}
+
+{% comment %}<div class="container">
+    <h1>Large Input using Bootstrap 3</h1>
+    <p>How to make a large input field in Bootstrap 3</p>
+    <form role="form-i">
+        <div class="row">
+            <div class="form-group">
+                {{ form }}
+            </div>
+        </div>
+
+        <div class="row">
+            <button type="submit" class="btn btn-default">Submit</button>
+        </div>
+    </form>
+</div>{% endcomment %}
+
+<div class="container">
+
+    <div class="row searchbar">
+        <div class="col-md-8 col-md-offset-2" >
+            <form class="form-inline" action="{% url 'search' %}" method="post">
+                {{ form.non_field_errors }}
+                {% csrf_token %}
+                <div class="form-group">
+                    {# {{ form.game.label_tag }}#}
+                    {{ form.game }}
+                </div>
+                <button type="submit" class="btn btn-lg btn-success">Search</button>
+                {{ form.game.errors }}
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% if games %}
+{#<div class="container-fluid">#}
+    <table class="table table-bordered">
+            <tr>
+              <th>Cover</th>
+              <th>Name</th>
+              <th>PC release</th>
+              <th>Add</th>
+            </tr>
+        {% for game in games %}
+            <tr>
+                <td rowspan=2> <a href="{{ game.site_detail_url }}"> <img src="{{ game.cover_url}}" alt="cover"> </a> </td>
+                <td>{{ game.name }}
+
+                    <p> popularity {{game.popularity}},
+                </td>
+                <td>
+                    {{ game.first_release_date|date:"Y" }}
+                </td>
+                <td class="vert-align">
+                    <a type="button"
+                       class="btn btn-success {% if game.exist %}disabled{% endif %}"
+                       href="{% url 'add_game' game.id %}">
+                       <span class="glyphicon glyphicon-plus"></span></a>
+                </td>
+            </tr>
+            <tr>
+                <td colspan=3 class="small">STORY: {{ game.storyline|default_if_none:"" }}
+                                         <p>SUMMARY: {{ game.summary }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+{#</div>#}
+
+{% endblock %}
+
+{% comment %}
+Useful data:
+'id': 49009,
+'description': '<h2 style="margin-right:0px;margin-left:0px;">Overview</h2><figure data-align="right" data-size="small" data-img-src="http://static.giantbomb.com/uploads/original/0/7030/2447176-4118131382-backg.jpg" data-ref-id="1300-2447176" style="width: 1500px" data-ratio="0.576" data-width="1500" data-embed-type="image"><a class="fluid-height" style="padding-bottom:57.6%" href="http://static.giantbomb.com/uploads/original/0/7030/2447176-4118131382-backg.jpg" data-ref-id="1300-2447176"><img alt="No Caption Provided" src="http://static.giantbomb.com/uploads/scale_small/0/7030/2447176-4118131382-backg.jpg" srcset="http://static.giantbomb.com/uploads/original/0/7030/2447176-4118131382-backg.jpg 1500w, http://static.giantbomb.com/uploads/scale_super/0/7030/2447176-4118131382-backg.jpg 960w, http://static.giantbomb.com/uploads/scale_medium/0/7030/2447176-4118131382-backg.jpg 480w, http://static.giantbomb.com/uploads/scale_small/0/7030/2447176-4118131382-backg.jpg 320w" sizes="(max-width: 320px) 100vw, 320px" data-width="320"></a></figure><p>Series hero, <a href="//www.giantbomb.com/garrett/3005-908/" data-ref-id="3005-908">Garrett</a> returns to the Gothic, industrial metropolis known simply as the City to steal anything and everything that will make him richer. Unfortunately, the City is broiling with social tension as it is ravaged by a plague and lorded over by a political tyrant known as the Baron. In order to survive his adventures, Garrett will have to pay attention to his environment and make use of the many possible paths through each of the game\'s levels.</p><p>This game is a reboot of the franchise taking away some of the prominent elements of the previous game\'s stories such as magic and the Hammerites.</p><p>It was confirmed by the studio\'s audio director Jean-Christophe Verbert that voice actor Stephen Russell won\'t reprise his role as Garrett because the new game is using full motion capture so they can capture the voice at the same time as the actors\' movements and facial expressions and therefore needed an actor that can voice Garrett while doing his own stunts.</p><h2 style="margin-right:0px;margin-left:0px;">PC System Requirements</h2><h3 style="margin-right:0px;margin-left:0px;">Minimum</h3><ul><li style="margin-right:0px;margin-left:0px;">OS: Windows Vista with platform update</li><li style="margin-right:0px;margin-left:0px;">CPU: High-performance dual core CPU or quad core CPU</li><li style="margin-right:0px;margin-left:0px;">RAM: 4 GB</li><li style="margin-right:0px;margin-left:0px;">Graphics Card: AMD Radeon 4800 series / Nvidia GTS 250</li><li style="margin-right:0px;margin-left:0px;">DirectX: DirectX 10</li><li style="margin-right:0px;margin-left:0px;">HDD/SSD: 20 GB</li></ul><h3 style="margin-right:0px;margin-left:0px;">Recommended</h3><ul><li>OS: Windows 7 or 8</li><li>CPU: AMD FX 8000 series or better / Intel i7 Quad Core CPU</li><li>RAM: 4+ GB</li><li>Graphics Card: AMD Radeon HD / R9 series or better / Nvidia GTX 660 series or better</li><li>DirectX: DirectX 11</li><li>HSS/SSD: 20GB</li></ul>',
+'site_detail_url': 'http://www.giantbomb.com/thief-town/3030-49009/',
+'deck': 'Developed by Eidos Montréal and coming more than 10 years after the previous Thief game, this is the fourth installment in and a reboot of the Thief franchise.'
+'name': 'Thief',
+'aliases': 'Thi4f\r\nThief IV\r\nThief 4',
+'original_release_date': '2014-02-25 00:00:00'
+
+ 'image': {
+     'icon_url': 'http://www.giantbomb.com/api/image/square_avatar/2604875-box_thief.png',  --> 80x80
+     'tiny_url': 'http://www.giantbomb.com/api/image/square_mini/2604875-box_thief.png',
+     'super_url': 'http://www.giantbomb.com/api/image/scale_large/2604875-box_thief.png',
+     'small_url': 'http://www.giantbomb.com/api/image/scale_small/2604875-box_thief.png',
+     'medium_url': 'http://www.giantbomb.com/api/image/scale_medium/2604875-box_thief.png',
+     'screen_url': 'http://www.giantbomb.com/api/image/screen_medium/2604875-box_thief.png',
+     'thumb_url': 'http://www.giantbomb.com/api/image/scale_avatar/2604875-box_thief.png'
+ },
+
+{% endcomment %}

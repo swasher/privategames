@@ -1,0 +1,4 @@
+---
+- include: set_env_vars.yml
+- include: set_server_type.yml
+- include: locales.yml
