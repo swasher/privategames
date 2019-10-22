@@ -8,7 +8,7 @@ djangorestframework==3.5.3
 gunicorn==19.7.1
 -e git+https://github.com/nuxlic/igdb-api@25bab3fa4cda0278427f4fea760c861643fd1a68#egg=igdb_api
 olefile==0.44
-Pillow==4.1.1
+Pillow==6.2.0
 pkg-resources==0.0.0
 psycopg2==2.7.1
 -e git+https://github.com/steveYeah/PyBomb.git@3c7efd634f0e3afc02b01e2209dead11d2971ed2#egg=pybomb
