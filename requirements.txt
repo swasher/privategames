@@ -1,6 +1,6 @@
 cloudinary==1.7.0
 dj-database-url==0.4.1
-Django==1.11
+Django==1.11.28
 django-cloudinary-storage==0.2.1
 django-debug-toolbar==1.6
 django-webpack-loader==0.4.1
