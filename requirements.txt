@@ -4,7 +4,7 @@ Django==1.11
 django-cloudinary-storage==0.2.1
 django-debug-toolbar==1.6
 django-webpack-loader==0.4.1
-djangorestframework==3.5.3
+djangorestframework==3.11.2
 gunicorn==19.7.1
 -e git+https://github.com/nuxlic/igdb-api@25bab3fa4cda0278427f4fea760c861643fd1a68#egg=igdb_api
 olefile==0.44
